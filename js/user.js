@@ -47,7 +47,7 @@ $(function() {
                 console.log(err);
                 if (err.code === 200) {
                     // 必须以服务器的方式来打开，意味着从现在开始，不要直接打开本地文件，而是需要使用liveserver来打开
-                    window.parent.location.reload()
+                    window.parent.location.reload();
                 };
             }
         });
