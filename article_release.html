@@ -10,13 +10,15 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
-    <!-- jq -->
-    <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 模板引擎 -->
     <script src="./libs/template-web.js"></script>
     <!-- 导入时间插件 -->
     <link rel="stylesheet" href="./libs/jedate/css/jedate.css">
     <script src="./libs/jedate/js/jedate.js"></script>
+    <!-- 引入文本域文档 -->
+    <script src="./libs/tinymce/tinymce.min.js"></script>
+    <!-- jq -->
+    <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 引入http地址文件 -->
     <script src="./js/http.js"></script>
     <!-- 引入article_release.js文件 -->
@@ -60,6 +62,7 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
                     <div class="col-sm-10">
+                        <textarea id="mytextarea" style='width:100%;height:300px'></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -73,7 +76,6 @@
     </div>
     <!-- 创建下拉列表模板引擎 -->
     <script type="text/template" id='articleidtemplate'>
-        <option name="categoryId">爱生活</option>
         {{each data}}
         <option value="{{$value.id}}">{{$value.name}}</option>
         {{/each}}
