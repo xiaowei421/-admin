@@ -82,6 +82,14 @@
         </tr>
         {{/each}}
     </script>
+
+    <!-- 创建下拉列表模板引擎 -->
+    <script type="text/template" id='articleidtemplate'>
+        <option value="">所有分类</option>
+        {{each data}}
+        <option value="{{$value.id}}">{{$value.name}}</option>
+        {{/each}}
+    </script>
 </body>
 
 </html>
