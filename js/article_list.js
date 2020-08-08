@@ -25,7 +25,7 @@ $(function() {
                 if (res.code === 200) {
                     // 将获取的文章数据渲染到页面
                     $('tbody').html(template('articletemplate', res.data));
-                    // 调用分页函数,用插件有一个bug当没有数据无法捕捉会进行报错，所以判定长度进行赋值
+                    // 调用分页函数,使用插件有一个bug当没有数据无法捕捉会进行报错，所以判定长度进行赋值
                     if (res.data.totalPage > 0) {
                         setPage(res.data.totalPage);
                     } else {

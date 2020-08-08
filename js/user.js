@@ -37,10 +37,10 @@ $(function() {
         // FormData构造函数中的表单对象必须是原生的dom,可以给表参数，
         let formdata = new FormData($('#form')[0]);
         $.ajax({
-            type: 'post',
-            url: BigNew.user_edit,
-            data: formdata,
-            datatype: 'json',
+            type: 'post', //类型
+            url: BigNew.user_edit, //地址
+            data: formdata, //参数
+            datatype: 'json', //将数据转换成JSON字符串格式
             contentType: false, //告诉ajax不要对数据进行编码
             processData: false, //告诉ajax不要进行数据的处理
             success: function(err) {
@@ -50,6 +50,7 @@ $(function() {
                     window.parent.location.reload();
                 };
             }
+
         });
     });
 });

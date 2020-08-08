@@ -14,10 +14,13 @@
     <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 模板引擎 -->
     <script src="./libs/template-web.js"></script>
-    <!-- 引入article_edit.js文件 -->
-    <script src="./js/article_edit.js"></script>
+    <!-- 导入时间插件 -->
+    <link rel="stylesheet" href="./libs/jedate/css/jedate.css">
+    <script src="./libs/jedate/js/jedate.js"></script>
     <!-- 引入http地址文件 -->
     <script src="./js/http.js"></script>
+    <!-- 引入article_edit.js文件 -->
+    <script src="./js/article_edit.js"></script>
 </head>
 
 <body>
@@ -44,11 +47,7 @@
                     <label for="inputCategory" class="col-sm-2 control-label">文章类别：</label>
                     <div class="col-sm-4">
                         <select class="form-control category" name="categoryId">
-                            <option>类别一</option>
-                            <option>类别二</option>
-                            <option>类别三</option>
-                            <option selected>类别四</option>
-                            <option>类别五</option>
+
                         </select>
                     </div>
                 </div>
@@ -64,13 +63,21 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success btn-edit">修改</button>
+                        <button type="submit" class="btn btn-success btn-edit">发布</button>
                         <button type="submit" class="btn btn-default btn-draft">存为草稿</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- 创建下拉列表模板引擎 -->
+    <script type="text/template" id='articleidtemplate'>
+        <option value="">所有分类</option>
+        {{each data}}
+        <option value="{{$value.id}}">{{$value.name}}</option>
+        {{/each}}
+    </script>
 </body>
 
 </html>
