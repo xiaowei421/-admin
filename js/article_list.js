@@ -21,7 +21,6 @@ $(function() {
             },
             datatype: 'json',
             success: function(res) {
-                console.log(res);
                 if (res.code === 200) {
                     // 将获取的文章数据渲染到页面
                     $('tbody').html(template('articletemplate', res.data));
@@ -51,7 +50,6 @@ $(function() {
             url: BigNew.category_list,
             datatype: 'json',
             success: function(res) {
-                console.log(res);
                 if (res.code === 200) {
                     // 将获取的文章数据渲染到页面
                     $('#selCategory').html(template('articleidtemplate', res));
