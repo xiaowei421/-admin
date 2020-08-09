@@ -59,9 +59,9 @@
             <td>{{$value.state}}</td>
             <td class="text-center">
                 {{if $value.state=='待审核'}}
-                <a href="javascript:void(0);;" class="btn btn-warning btn-xs">批准</a> {{else if $value.state=='已通过'}}
-                <a href="javascript:void(0);;" class="btn btn-warning btn-xs">拒绝</a> {{/if}}
-                <a href="javascript:void(0);;" class="btn btn-danger btn-xs">删除</a>
+                <a href="javascript:void(0);;" data-id={{$value.id}} class="btn btn-warning btn-xs bth-ratify" style="background-color:green;">批准</a> {{else if $value.state=='已通过'}}
+                <a href="javascript:void(0);;" data-id={{$value.id}} class="btn btn-warning btn-xs btn-refuse">拒绝</a> {{/if}}
+                <a href="javascript:void(0);;" data-id={{$value.id}} class="btn btn-danger btn-xs btn-delete">删除</a>
             </td>
         </tr>
         {{/each}}

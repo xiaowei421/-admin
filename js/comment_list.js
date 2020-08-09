@@ -25,7 +25,7 @@ $(function() {
     };
     init();
 
-
+    //2,页码
     function yema(tole) {
         $(".pagination").bootstrapPaginator({
             //3.1设置版本号
@@ -40,6 +40,51 @@ $(function() {
                 //3.5设置显示页为当前点击页码
                 page = cpage;
                 init();
+            }
+        });
+    };
+    //3，删除评论
+    // 请求地址：/admin/comment/delete
+    // 请求方式：post
+    // 请求参数：
+    $('tbody').on('click', '.btn-delete', function() {
+        //   获取id
+        let id = $(this).data('id')
+        refuse(BigNew.comment_delete, id)
+    });
+
+    //4，拒绝评论审核不通过
+    // 请求地址：/admin/comment/reject
+    // 请求方式：post
+    // 请求参数：
+    $('tbody').on('click', '.btn-refuse', function() {
+        //   获取id
+        let id = $(this).data('id')
+        refuse(BigNew.comment_reject, id)
+    });
+
+    //5，通过评论审核通过
+    // 请求地址：/admin/comment/pass
+    // 请求方式：post
+    // 请求参数：
+    $('tbody').on('click', '.bth-ratify', function() {
+        //   获取id
+        let id = $(this).data('id')
+        refuse(BigNew.comment_pass, id)
+    });
+
+    //封装拒绝和删除请求
+    function refuse(url, id) {
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: { id },
+            datatype: 'json',
+            success: function(res) {
+                if (res.code) {
+                    alert(res.msg);
+                    init();
+                };
             }
         });
     };
