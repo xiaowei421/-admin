@@ -1,4 +1,14 @@
 $(function() {
+    $.ajax({
+        url: BigNew.category_list,
+        datatype: 'json',
+        success: function(res) {
+            if (res.code === 200) {
+                // 将获取的文章数据渲染到页面
+                $('#selCategory').html(template('articleidtemplate', res));
+            };
+        }
+    });
 
     let page = 1 // 当前页码
     let perpage = 10 // 每页显示的数量
@@ -25,7 +35,7 @@ $(function() {
                     // 将获取的文章数据渲染到页面
                     $('tbody').html(template('articletemplate', res.data));
                     // 调用分页函数,使用插件有一个bug当没有数据无法捕捉会进行报错，所以判定长度进行赋值
-                    if (res.data.totalPage > 0) {
+                    if (res.data.totalPage > 1) {
                         setPage(res.data.totalPage);
                     } else {
                         setPage(1);
@@ -46,16 +56,7 @@ $(function() {
         //2.1调用更新数据函数
         init();
         //2.2发送请求
-        $.ajax({
-            url: BigNew.category_list,
-            datatype: 'json',
-            success: function(res) {
-                if (res.code === 200) {
-                    // 将获取的文章数据渲染到页面
-                    $('#selCategory').html(template('articleidtemplate', res));
-                };
-            }
-        });
+
         return false
     });
 
@@ -94,4 +95,27 @@ $(function() {
         });
     };
 
+    // 4,删除文章
+    // 请求地址：/admin/article/delete
+    // 请求方式：post
+    // 请求参数：
+    $('tbody').on('click', '.delete', function() {
+        //4.1，获取自定义存储的id
+        const id = $(this).data('id');
+        if (confirm('是否真的需要删除？')) {
+            $.ajax({
+                type: 'post',
+                url: BigNew.article_delete,
+                data: { id },
+                dataType: 'json',
+                success: function(res) {
+                    if (res.code == 204) {
+                        alert(res.msg);
+                        // 刷新不能直接设置init，而是需要进行一些处理
+                        init();
+                    };
+                }
+            });
+        };
+    });
 });
