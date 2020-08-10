@@ -1,75 +1,55 @@
 $(function() {
-    // 1,获取id?id=22,截取值
-    let id = location.search.split('=')[1];
-    //2,实现文章类别：发布时间：文章内容：，将发表文章的代码封装一个文件为commet
 
-    //3，通过id获取文章数据
-    // 请求地址：/admin/article/search
-    // 请求方式：get
-    // 请求参数：
-    $.ajax({
-        url: BigNew.article_search,
-        data: { id },
-        datatyle: 'json',
-        success: function(res) {
-            // 3.1将数据渲染到页面
-            $('.title').val(res.data.title); //文章标题
-            $('.article_cover').prop('src', res.data.cover); //封面图片
-            $('.category').val(res.data.categoryId); //文章类别
-            $('#indate').val(res.data.date); //发布时间
-            $('#mytextarea').val(res.data.content); //发布内容
-        }
-    });
 
-    //4，文件预览
+    //2,文件预览
     $('#inputCover').on('change', function() {
-        //4.1,获取上传文件
-        let mydata = this.files[0];
-        //4.2,使用URL.createbojecturl将文件转为url格式
-        let url = URL.createObjectURL(mydata);
-        //4.3,将转换好的数据渲染到img
+        //2.1获取当前上传文件
+        const files = this.files[0];
+        //2.2将文件转换为url
+        const url = URL.createObjectURL(files)
+            //2.3将路径添加到img src
         $('.article_cover').attr('src', url);
     });
 
-    //5，获取编辑内容实现修改
-    $('.btn-edit').on('click', function(e) {
-        //5.1,阻止标签默认行为
-        e.preventDefault();
-        //调用上传函数
-        post('已发布');
-    });
-    $('.btn-draft').on('click', function(e) {
-        //5.1,阻止标签默认行为
-        e.preventDefault();
-        //调用上传函数
-        post('草稿');
-    });
 
-    //封装修改-草稿请求
-    // 请求地址：/admin/article / edit
+    //发布，草稿文章
+    // 请求地址：/admin/article/publish
     // 请求方式：post
-    // 请求参数：
+    // 请求参数：通过formData提交
+    $('.btn-release').on('click', function(e) { //发布
+        // 阻止标签默认行为
+        e.preventDefault()
+        uplodig('已发布')
+    });
+    $('.btn-draft').on('click', function(e) { //草稿
+        // 阻止标签默认行为
+        e.preventDefault()
+        uplodig('草稿')
+    });
 
-    function post(state) {
-        //使用FormData获取表单文本值，获取不到的，手动追加
+
+    //封装已发布，草稿
+    function uplodig(data) {
+        //获取表单文本
         let formdata = new FormData($('#form')[0]);
-        //追加获取不到的参数
-        formdata.append('id', id);
+        //手动在formdata中添加content参数
+        // 因为文本域是隐藏的上面显示的是页中页iframe 所以需要使用tinymce.activeEditor.getContent() 富文本编辑器获取文本内容和设置文本内容
         formdata.append('content', tinymce.activeEditor.getContent());
-        formdata.append('state', state);
-        //发送请求
+        //添加state已发布
+        formdata.append('state', data);
+        // 发送ajax请求
         $.ajax({
             type: 'post',
-            url: BigNew.article_edit,
+            url: BigNew.article_publish,
             data: formdata,
-            datatype: 'json',
-            contentType: false,
             processData: false,
+            contentType: false,
+            dataType: 'json',
             success: function(res) {
-                if (res.code === 200) {
-                    alert(res.msg);
-                    //跳转到文章页面
-                    window.location.href = './article_list.html';
+                if (res.code == 200) {
+                    alert(res.msg)
+                        // 返回页面
+                    window.location.href = "./article_list.html";
                 };
             }
         });

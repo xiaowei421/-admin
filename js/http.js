@@ -21,6 +21,7 @@
         comment_pass: baseURL + '/admin/comment/pass', //文章评论通过
         comment_reject: baseURL + '/admin/comment/reject', //文章评论不通过
         comment_delete: baseURL + '/admin/comment/delete', //文章评论删除
+        main_count: baseURL + '/admin/data/info', //文章评论删除
     };
     // 暴露接口
     window.BigNew = bigNew;

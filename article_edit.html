@@ -10,21 +10,21 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
-    <!-- jq -->
-    <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 模板引擎 -->
     <script src="./libs/template-web.js"></script>
     <!-- 导入时间插件 -->
     <link rel="stylesheet" href="./libs/jedate/css/jedate.css">
     <script src="./libs/jedate/js/jedate.js"></script>
-    <!-- 导入富文本插件 -->
+    <!-- 引入富文本插件 -->
     <script src="./libs/tinymce/tinymce.min.js"></script>
+    <!-- jq -->
+    <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 引入http地址文件 -->
     <script src="./js/http.js"></script>
     <!-- 引入comment文件 -->
     <script src="./js/comment.js"></script>
-    <!-- 引入article_edit.js文件 -->
-    <script src="./js/article_edit.js"></script>
+    <!-- 引入article_release.js文件 -->
+    <script src="./js/article_release.js"></script>
 </head>
 
 <body>
@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <label for="inputTitle" class="col-sm-2 control-label">文章标题：</label>
                     <div class="col-sm-10">
-                        <input type="text" name="title" class="form-control title" id="inputTitle" placeholder="文章标题" value="">
+                        <input type="text" name="title" class="form-control title" id="inputTitle" placeholder="文章标题文字">
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="inputCategory" class="col-sm-2 control-label">文章类别：</label>
                     <div class="col-sm-4">
-                        <select class="form-control category" name="categoryId">
+                        <select class="form-control category" name="categoryId" style="width: 200px;">
 
                         </select>
                     </div>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success btn-edit">修改</button>
+                        <button type="submit" class="btn btn-success btn-release">发布</button>
                         <button type="submit" class="btn btn-default btn-draft">存为草稿</button>
                     </div>
                 </div>
