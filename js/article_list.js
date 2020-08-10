@@ -32,10 +32,17 @@ $(function() {
             datatype: 'json',
             success: function(res) {
                 if (res.code === 200) {
-                    // 将获取的文章数据渲染到页面
+                    // 1.2 将获取的文章数据渲染到页面
                     $('tbody').html(template('articletemplate', res.data));
-                    // 调用分页函数,使用插件有一个bug当没有数据无法捕捉会进行报错，所以判定长度进行赋值
+                    // 1.2 调用分页函数,使用插件有一个bug当没有数据无法捕捉会进行报错，所以判定长度进行赋值
                     if (res.data.totalPage > 1) {
+                        //1.3 判定页面数据为0时显示页面为页码总数量
+                        if (res.data.data.length === 0) {
+                            // 1.4 将页面总数量赋值为显示页面
+                            page = res.data.totalPage;
+                            // 1.5更新数据
+                            init();
+                        };
                         setPage(res.data.totalPage);
                     } else {
                         setPage(1);
@@ -88,6 +95,9 @@ $(function() {
             onPageClicked: function(event, originalEvent, type, cpage) {
                 // console.log(cpage);
                 //3.5设置显示页为当前点击页码
+                // if (cpage.data.data.length > 1) {
+                //     cpage--
+                // };
                 page = cpage;
                 //3.6调用更新数据函数
                 init();
@@ -113,6 +123,7 @@ $(function() {
                         alert(res.msg);
                         // 刷新不能直接设置init，而是需要进行一些处理
                         init();
+                        // window.location.reload();
                     };
                 }
             });
